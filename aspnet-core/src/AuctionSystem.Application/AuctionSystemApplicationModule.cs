@@ -13,6 +13,7 @@ namespace AuctionSystem
         public override void PreInitialize()
         {
             Configuration.Authorization.Providers.Add<AuctionSystemAuthorizationProvider>();
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(CustomDtoMapper.CreateMappings);
         }
 
         public override void Initialize()

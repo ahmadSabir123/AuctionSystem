@@ -3,6 +3,8 @@
   <texts>
     <text name="HomePage" value="Home page" />
     <text name="About" value="About" />
+    <text name="Locations" value="Locations" />
+    <text name="Categories" value="Categories" />
     <text name="WelcomeMessage" value="Welcome to AuctionSystem!" />
     <text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
     <text name="TenantNameCanNotBeEmpty" value="Tenant name can not be empty" />

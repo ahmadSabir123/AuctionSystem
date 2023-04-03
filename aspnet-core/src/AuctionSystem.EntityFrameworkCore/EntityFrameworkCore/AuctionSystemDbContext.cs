@@ -4,12 +4,15 @@ using AuctionSystem.Authorization.Roles;
 using AuctionSystem.Authorization.Users;
 using AuctionSystem.MultiTenancy;
 
+
 namespace AuctionSystem.EntityFrameworkCore
 {
     public class AuctionSystemDbContext : AbpZeroDbContext<Tenant, Role, User, AuctionSystemDbContext>
     {
-        /* Define a DbSet for each entity of the application */
-        
+        public virtual DbSet<AuctionSystem.Location.Location> Locations { get; set; }
+
+        public virtual DbSet<AuctionSystem.Category.Category> Categories { get; set; }
+
         public AuctionSystemDbContext(DbContextOptions<AuctionSystemDbContext> options)
             : base(options)
         {
