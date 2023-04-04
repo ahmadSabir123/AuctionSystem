@@ -2,7 +2,9 @@
 <localizationDictionary culture="en">
   <texts>
     <text name="HomePage" value="Home page" />
-    <text name="About" value="About" />
+	  <text name="Actions" value="Actions" />
+
+	  <text name="About" value="About" />
     <text name="Locations" value="Locations" />
     <text name="Categories" value="Categories" />
     <text name="WelcomeMessage" value="Welcome to AuctionSystem!" />

@@ -38,9 +38,15 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
+import { LocationsComponent } from '../app/locations/locations.component';
+import { CategoriesComponent } from '../app/categories/categories.component';
+import { TableModule } from 'primeng/table';
+
 
 @NgModule({
     declarations: [
+        CategoriesComponent,
+        LocationsComponent,
         AppComponent,
         HomeComponent,
         AboutComponent,
@@ -67,9 +73,10 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         SidebarComponent,
         SidebarLogoComponent,
         SidebarUserPanelComponent,
-        SidebarMenuComponent
+        SidebarMenuComponent,
     ],
     imports: [
+        TableModule,
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
