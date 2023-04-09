@@ -5,6 +5,7 @@
 	  <text name="Actions" value="Actions" />
 	  <text name="NoData" value="No Data" />
 	  <text name="CreateNewLocation" value="Create New Location" />
+	  <text name="EditLocation" value="Edit Location" />
 	  <text name="LocationName" value="Location Name" />
 
 
