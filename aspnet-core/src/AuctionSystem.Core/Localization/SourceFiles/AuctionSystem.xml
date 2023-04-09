@@ -4,6 +4,9 @@
     <text name="HomePage" value="Home page" />
 	  <text name="Actions" value="Actions" />
 	  <text name="NoData" value="No Data" />
+	  <text name="CreateNewLocation" value="Create New Location" />
+	  <text name="LocationName" value="Location Name" />
+
 
 	  <text name="About" value="About" />
     <text name="Locations" value="Locations" />

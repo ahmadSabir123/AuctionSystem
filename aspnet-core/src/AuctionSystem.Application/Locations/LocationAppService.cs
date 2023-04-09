@@ -52,10 +52,12 @@ namespace AuctionSystem.Locations
             return (long)input.Id;
 
         }
-        public async Task<PagedResultDto<LocationDto>> GetAllLocation(GetAllLocationsInput input)
+        public async Task<PagedResultDto<LocationDto>> GetAllLocation(GetAllLocationsInput input)   
         {
 
-            var data =  _locationRepository.GetAll().WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => e.Name.ToLower().Trim().Contains(input.Filter.ToLower().Trim()));
+            var data =  _locationRepository.GetAll()
+                .WhereIf(input.LocationId != null,x =>x.Id ==input.LocationId)
+                .WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => e.Name.ToLower().Trim().Contains(input.Filter.ToLower().Trim()));
             var location =  data.Skip(input.SkipCount).Take(input.MaxResultCount).ToList();
             return new PagedResultDto<LocationDto>(
                 data.Count(),

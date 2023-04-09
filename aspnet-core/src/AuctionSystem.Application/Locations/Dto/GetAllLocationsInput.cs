@@ -10,5 +10,6 @@ namespace AuctionSystem.Locations.Dto
     public class GetAllLocationsInput : PagedAndSortedResultRequestDto
     {
         public string Filter { get; set; }
+        public int? LocationId { get; set; }
     }
 }

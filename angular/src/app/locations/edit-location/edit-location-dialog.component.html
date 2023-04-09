@@ -1,0 +1,39 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #createLocaionForm="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'EditLocation' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="locationName">
+        {{ "LocationName" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          name="locationName"
+          id="locationName"
+          required
+          [(ngModel)]="location.name"
+          #locationNameModel="ngModel"
+          #locationNameEl
+        />
+        <abp-validation-summary
+          [control]="locationNameModel"
+          [controlEl]="locationNameEl"
+        ></abp-validation-summary>
+      </div>
+    </div>
+  </div>
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createLocaionForm.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>

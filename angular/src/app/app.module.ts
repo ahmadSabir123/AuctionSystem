@@ -41,12 +41,17 @@ import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
 import { LocationsComponent } from '../app/locations/locations.component';
+import { EditLocationDialogComponent } from '../app/locations/edit-location/edit-location-dialog.component';
+import { CreateLocationDialogComponent } from '../app/locations/create-location/create-location-dialog.component';
+
 import { CategoriesComponent } from '../app/categories/categories.component';
 import { TableModule } from 'primeng/table';
 
 
 @NgModule({
     declarations: [
+        EditLocationDialogComponent,
+        CreateLocationDialogComponent,
         CategoriesComponent,
         LocationsComponent,
         AppComponent,

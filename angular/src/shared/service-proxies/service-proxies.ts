@@ -396,17 +396,22 @@ export class LocationServiceProxy {
 
     /**
      * @param filter (optional) 
+     * @param locationId (optional) 
      * @param sorting (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
      * @return Success
      */
-    getAllLocation(filter: string | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<LocationDtoPagedResultDto> {
+    getAllLocation(filter: string | undefined, locationId: number | undefined, sorting: string | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<LocationDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Location/GetAllLocation?";
         if (filter === null)
             throw new Error("The parameter 'filter' cannot be null.");
         else if (filter !== undefined)
             url_ += "Filter=" + encodeURIComponent("" + filter) + "&";
+        if (locationId === null)
+            throw new Error("The parameter 'locationId' cannot be null.");
+        else if (locationId !== undefined)
+            url_ += "LocationId=" + encodeURIComponent("" + locationId) + "&";
         if (sorting === null)
             throw new Error("The parameter 'sorting' cannot be null.");
         else if (sorting !== undefined)
