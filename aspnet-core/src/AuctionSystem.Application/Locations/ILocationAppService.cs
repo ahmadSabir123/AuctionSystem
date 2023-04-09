@@ -14,5 +14,6 @@ namespace AuctionSystem.Locations
     {
         Task<long> CreateOrEdit(LocationDto input);
         Task Delete(EntityDto<long> input);
+        Task<PagedResultDto<LocationDto>> GetAllLocation(GetAllLocationsInput input);
     }
 }

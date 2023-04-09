@@ -1,7 +1,9 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.Authorization;
+using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using AuctionSystem.Authorization;
+using System.Linq.Dynamic.Core;
 using AuctionSystem.Categories.Dto;
 using AuctionSystem.Locations.Dto;
 using System;
@@ -49,6 +51,16 @@ namespace AuctionSystem.Locations
             ObjectMapper.Map(input, supplier);
             return (long)input.Id;
 
+        }
+        public async Task<PagedResultDto<LocationDto>> GetAllLocation(GetAllLocationsInput input)
+        {
+
+            var data =  _locationRepository.GetAll().WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => e.Name.ToLower().Trim().Contains(input.Filter.ToLower().Trim()));
+            var location =  data.Skip(input.SkipCount).Take(input.MaxResultCount).ToList();
+            return new PagedResultDto<LocationDto>(
+                data.Count(),
+                ObjectMapper.Map<List<LocationDto>>(location)
+            );
         }
 
         public async Task Delete(EntityDto<long> input)

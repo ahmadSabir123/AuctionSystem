@@ -11,6 +11,8 @@ import {
 } from 'abp-ng2-module';
 
 import { AppSessionService } from '@shared/session/app-session.service';
+import { Paginator } from 'primeng/paginator';
+import { LazyLoadEvent } from 'primeng/api';
 
 export abstract class AppComponentBase {
 
@@ -55,5 +57,27 @@ export abstract class AppComponentBase {
 
     isGranted(permissionName: string): boolean {
         return this.permission.isGranted(permissionName);
+    }
+    getMaxResultCount(paginator: Paginator, event: LazyLoadEvent): number {
+        if (paginator.rows) {
+            return paginator.rows;
+        }
+
+        if (!event) {
+            return 0;
+        }
+
+        return event.rows;
+    }
+    getSkipCount(paginator: Paginator, event: LazyLoadEvent): number {
+        if (paginator.first) {
+            return paginator.first;
+        }
+
+        if (!event) {
+            return 0;
+        }
+
+        return event.first;
     }
 }
