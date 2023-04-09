@@ -11,7 +11,8 @@ import { AppComponentBase } from '@shared/app-component-base';
 import {
   UserServiceProxy,
   UserDto,
-  RoleDto
+  RoleDto,
+  LocationServiceProxy
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
@@ -26,11 +27,14 @@ export class EditUserDialogComponent extends AppComponentBase
   id: number;
 
   @Output() onSave = new EventEmitter<any>();
+  locationlist: any;
+  location:any;
 
   constructor(
     injector: Injector,
     public _userService: UserServiceProxy,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private _locationServiceProxy: LocationServiceProxy
   ) {
     super(injector);
   }
@@ -44,6 +48,17 @@ export class EditUserDialogComponent extends AppComponentBase
         this.setInitialRolesStatus();
       });
     });
+    if (this.isGranted("Pages.Locations")) {
+      this.getAllLocationForDropdown();
+    }
+  }
+  getAllLocationForDropdown() {
+    this._locationServiceProxy
+      .getAllLocation(undefined, undefined, undefined, undefined, undefined)
+      .subscribe((result) => {
+        debugger;
+        this.locationlist = result.items;
+      });
   }
 
   setInitialRolesStatus(): void {

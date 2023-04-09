@@ -3,23 +3,26 @@ import {
   Injector,
   OnInit,
   EventEmitter,
-  Output
-} from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { forEach as _forEach, map as _map } from 'lodash-es';
-import { AppComponentBase } from '@shared/app-component-base';
+  Output,
+} from "@angular/core";
+import { BsModalRef } from "ngx-bootstrap/modal";
+import { forEach as _forEach, map as _map } from "lodash-es";
+import { AppComponentBase } from "@shared/app-component-base";
 import {
   UserServiceProxy,
   CreateUserDto,
-  RoleDto
-} from '@shared/service-proxies/service-proxies';
-import { AbpValidationError } from '@shared/components/validation/abp-validation.api';
+  RoleDto,
+  LocationServiceProxy,
+} from "@shared/service-proxies/service-proxies";
+import { AbpValidationError } from "@shared/components/validation/abp-validation.api";
 
 @Component({
-  templateUrl: './create-user-dialog.component.html'
+  templateUrl: "./create-user-dialog.component.html",
 })
-export class CreateUserDialogComponent extends AppComponentBase
-  implements OnInit {
+export class CreateUserDialogComponent
+  extends AppComponentBase
+  implements OnInit
+{
   saving = false;
   user = new CreateUserDto();
   roles: RoleDto[] = [];
@@ -27,15 +30,15 @@ export class CreateUserDialogComponent extends AppComponentBase
   defaultRoleCheckedStatus = false;
   passwordValidationErrors: Partial<AbpValidationError>[] = [
     {
-      name: 'pattern',
+      name: "pattern",
       localizationKey:
-        'PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber',
+        "PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber",
     },
   ];
   confirmPasswordValidationErrors: Partial<AbpValidationError>[] = [
     {
-      name: 'validateEqual',
-      localizationKey: 'PasswordsDoNotMatch',
+      name: "validateEqual",
+      localizationKey: "PasswordsDoNotMatch",
     },
   ];
 
@@ -44,10 +47,13 @@ export class CreateUserDialogComponent extends AppComponentBase
   constructor(
     injector: Injector,
     public _userService: UserServiceProxy,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private _locationServiceProxy: LocationServiceProxy
   ) {
     super(injector);
   }
+  locationlist: any;
+  location: any;
 
   ngOnInit(): void {
     this.user.isActive = true;
@@ -56,6 +62,17 @@ export class CreateUserDialogComponent extends AppComponentBase
       this.roles = result.items;
       this.setInitialRolesStatus();
     });
+    if (this.isGranted("Pages.Locations")) {
+      this.getAllLocationForDropdown();
+    }
+  }
+  getAllLocationForDropdown() {
+    this._locationServiceProxy
+      .getAllLocation(undefined, undefined, undefined, undefined, undefined)
+      .subscribe((result) => {
+        debugger;
+        this.locationlist = result.items;
+      });
   }
 
   setInitialRolesStatus(): void {
@@ -90,10 +107,11 @@ export class CreateUserDialogComponent extends AppComponentBase
     this.saving = true;
 
     this.user.roleNames = this.getCheckedRoles();
+    this.user.locationId = this.location;
 
     this._userService.create(this.user).subscribe(
       () => {
-        this.notify.info(this.l('SavedSuccessfully'));
+        this.notify.info(this.l("SavedSuccessfully"));
         this.bsModalRef.hide();
         this.onSave.emit();
       },

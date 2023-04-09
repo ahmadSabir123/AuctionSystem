@@ -101,6 +101,15 @@
             ></abp-validation-summary>
           </div>
         </div>
+        <div class="form-group row" [hidden]="!isGranted('Pages.Locations')">
+          <label class="col-md-3 col-form-label" for="location">
+            {{ "Location" | localize }}
+          </label>
+          <div class="col-md-9">
+            <p-dropdown class="p-fluid" placeholder="Select Location" [ngModelOptions]="{standalone: true}" [filter]='true' optionValue="id" [options]="locationlist"
+              [(ngModel)]="location" optionLabel="name"></p-dropdown>
+          </div>
+        </div>
         <div class="form-group row mb-0">
           <label class="col-md-3 col-form-label">
             {{ "IsActive" | localize }}

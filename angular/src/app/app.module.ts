@@ -15,6 +15,7 @@ import { SharedModule } from '@shared/shared.module';
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
 import { PaginatorModule } from 'primeng/paginator';
+import { DropdownModule } from 'primeng/dropdown';
 
 // tenants
 import { TenantsComponent } from '@app/tenants/tenants.component';
@@ -83,6 +84,7 @@ import { TableModule } from 'primeng/table';
         SidebarMenuComponent,
     ],
     imports: [
+        DropdownModule,
         PaginatorModule,
         TableModule,
         CommonModule,

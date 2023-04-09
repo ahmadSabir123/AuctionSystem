@@ -2632,6 +2632,7 @@ export interface ICreateTenantDto {
 }
 
 export class CreateUserDto implements ICreateUserDto {
+    locationId: number | undefined;
     userName: string;
     name: string;
     surname: string;
@@ -2651,6 +2652,7 @@ export class CreateUserDto implements ICreateUserDto {
 
     init(_data?: any) {
         if (_data) {
+            this.locationId = _data["locationId"];
             this.userName = _data["userName"];
             this.name = _data["name"];
             this.surname = _data["surname"];
@@ -2674,6 +2676,7 @@ export class CreateUserDto implements ICreateUserDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["locationId"] = this.locationId;
         data["userName"] = this.userName;
         data["name"] = this.name;
         data["surname"] = this.surname;
@@ -2697,6 +2700,7 @@ export class CreateUserDto implements ICreateUserDto {
 }
 
 export interface ICreateUserDto {
+    locationId: number | undefined;
     userName: string;
     name: string;
     surname: string;
