@@ -41,11 +41,13 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
-import { LocationsComponent } from '../app/locations/locations.component';
+import { LocationComponent } from '../app/locations/locations.component';
 import { EditLocationDialogComponent } from '../app/locations/edit-location/edit-location-dialog.component';
 import { CreateLocationDialogComponent } from '../app/locations/create-location/create-location-dialog.component';
-
-import { CategoriesComponent } from '../app/categories/categories.component';
+import { CalendarModule } from 'primeng/calendar';
+import { CreateOrEditProductModelComponent } from '../app/products/create-or-edit-product/create-or-edit-product.component';
+import { ProductComponent } from '../app/products/products.component';
+import { CategoryComponent } from '../app/categories/categories.component';
 import { CreateCategoryDialogComponent } from './categories/create-category/create-category-dialog.component';
 import { EditCategoryDialogComponent } from '../app/categories/edit-category/edit-category-dialog.component';
 import { TableModule } from 'primeng/table';
@@ -53,12 +55,14 @@ import { TableModule } from 'primeng/table';
 
 @NgModule({
     declarations: [
+        CreateOrEditProductModelComponent,
+        ProductComponent,
         EditCategoryDialogComponent,
         CreateCategoryDialogComponent,
         EditLocationDialogComponent,
         CreateLocationDialogComponent,
-        CategoriesComponent,
-        LocationsComponent,
+        CategoryComponent,
+        LocationComponent,
         AppComponent,
         HomeComponent,
         AboutComponent,
@@ -88,6 +92,7 @@ import { TableModule } from 'primeng/table';
         SidebarMenuComponent,
     ],
     imports: [
+        CalendarModule,
         DropdownModule,
         PaginatorModule,
         TableModule,

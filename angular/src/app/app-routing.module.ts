@@ -8,8 +8,9 @@ import { UsersComponent } from './users/users.component';
 import { TenantsComponent } from './tenants/tenants.component';
 import { RolesComponent } from 'app/roles/roles.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
-import { LocationsComponent } from './locations/locations.component';
-import { CategoriesComponent } from './categories/categories.component';
+import { LocationComponent } from './locations/locations.component';
+import { CategoryComponent } from './categories/categories.component';
+import { ProductComponent } from './products/products.component';
 
 @NgModule({
     imports: [
@@ -18,8 +19,9 @@ import { CategoriesComponent } from './categories/categories.component';
                 path: '',
                 component: AppComponent,
                 children: [
-                    { path: 'categories', component: CategoriesComponent, data: { permission: 'Pages.Categories' }, canActivate: [AppRouteGuard] },
-                    { path: 'locations', component: LocationsComponent, data: { permission: 'Pages.Locations' }, canActivate: [AppRouteGuard] },
+                    { path: 'products', component: ProductComponent, data: { permission: 'Pages.Products' }, canActivate: [AppRouteGuard] },
+                    { path: 'categories', component: CategoryComponent, data: { permission: 'Pages.Categories' }, canActivate: [AppRouteGuard] },
+                    { path: 'locations', component: LocationComponent, data: { permission: 'Pages.Locations' }, canActivate: [AppRouteGuard] },
                     { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard] },
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },

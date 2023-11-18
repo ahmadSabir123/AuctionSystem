@@ -12,7 +12,8 @@ import {
   UserServiceProxy,
   UserDto,
   RoleDto,
-  LocationServiceProxy
+  LocationServiceProxy,
+  CommonLookUpServiceProxy
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
@@ -28,10 +29,13 @@ export class EditUserDialogComponent extends AppComponentBase
 
   @Output() onSave = new EventEmitter<any>();
   locationlist: any;
-  location:any;
+  location: any;
+  userTypeList = [{ name: "Seller", value: 1 }, { name: "Buyer", value: 0 }]
+  userType: number;
 
   constructor(
     injector: Injector,
+    private _commonLookUpServiceProxy: CommonLookUpServiceProxy,
     public _userService: UserServiceProxy,
     public bsModalRef: BsModalRef,
     private _locationServiceProxy: LocationServiceProxy
@@ -42,6 +46,8 @@ export class EditUserDialogComponent extends AppComponentBase
   ngOnInit(): void {
     this._userService.get(this.id).subscribe((result) => {
       this.user = result;
+      this.userType = this.user.type;
+      this.location = this.user.locationId;
 
       this._userService.getRoles().subscribe((result2) => {
         this.roles = result2.items;
@@ -53,11 +59,10 @@ export class EditUserDialogComponent extends AppComponentBase
     }
   }
   getAllLocationForDropdown() {
-    this._locationServiceProxy
-      .getAllLocation(undefined, undefined, undefined, undefined, undefined)
+    this._commonLookUpServiceProxy
+      .getAllLocationsForDropdown()
       .subscribe((result) => {
-        debugger;
-        this.locationlist = result.items;
+        this.locationlist = result;
       });
   }
 
@@ -91,6 +96,8 @@ export class EditUserDialogComponent extends AppComponentBase
     this.saving = true;
 
     this.user.roleNames = this.getCheckedRoles();
+    this.user.locationId = this.location;
+    this.user.type = this.userType;
 
     this._userService.update(this.user).subscribe(
       () => {

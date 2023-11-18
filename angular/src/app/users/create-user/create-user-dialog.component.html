@@ -78,6 +78,15 @@
               [(ngModel)]="location" optionLabel="name"></p-dropdown>
           </div>
         </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="type">
+            {{ "Type" | localize }}
+          </label>
+          <div class="col-md-9">
+            <p-dropdown class="p-fluid" placeholder="Select user type" [ngModelOptions]="{standalone: true}" [filter]='true' optionValue="value" [options]="userTypeList"
+              [(ngModel)]="userType" optionLabel="name"></p-dropdown>
+          </div>
+        </div>
         <div class="form-group row mb-0">
           <label class="col-md-3 col-form-label">
             {{ "IsActive" | localize }}

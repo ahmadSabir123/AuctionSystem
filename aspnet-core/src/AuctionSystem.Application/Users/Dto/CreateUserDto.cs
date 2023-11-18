@@ -4,12 +4,14 @@ using Abp.Authorization.Users;
 using Abp.AutoMapper;
 using Abp.Runtime.Validation;
 using AuctionSystem.Authorization.Users;
+using AuctionSystem.Enums;
 
 namespace AuctionSystem.Users.Dto
 {
     [AutoMapTo(typeof(User))]
     public class CreateUserDto : IShouldNormalize
     {
+        public UserType Type { get; set; }
         public long? LocationId { get; set; }
         [Required]
         [StringLength(AbpUserBase.MaxUserNameLength)]

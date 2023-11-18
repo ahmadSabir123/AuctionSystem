@@ -1,81 +1,72 @@
 import { Component, Injector, OnInit, ViewChild } from "@angular/core";
 import { appModuleAnimation } from "@shared/animations/routerTransition";
 import { AppComponentBase } from "@shared/app-component-base";
-import { LocationServiceProxy } from "@shared/service-proxies/service-proxies";
+import { ProductServiceProxy } from "@shared/service-proxies/service-proxies";
 import { LazyLoadEvent } from "primeng/api";
 import { Paginator } from "primeng/paginator";
 import { Table } from "primeng/table";
 import { finalize } from "rxjs";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { CreateLocationDialogComponent } from "./create-location/create-location-dialog.component";
-import { EditLocationDialogComponent } from "./edit-location/edit-location-dialog.component";
+import { CreateOrEditProductModelComponent } from "./create-or-edit-product/create-or-edit-product.component";
 
 
 @Component({
-  templateUrl: "./locations.component.html",
+  templateUrl: "./products.component.html",
   animations: [appModuleAnimation()],
 })
-export class LocationComponent extends AppComponentBase implements OnInit {
+export class ProductComponent extends AppComponentBase implements OnInit {
   @ViewChild("dataTable", { static: true }) dataTable: Table;
   @ViewChild("paginator", { static: true }) paginator: Paginator;
 
-  locationRecord = [];
+  productRecord = [];
   filter: any;
   totalRecord: number;
   constructor(
     injector: Injector,
     private _modalService: BsModalService,
-    private _locationServiceProxy: LocationServiceProxy
+    private _productServiceProxy: ProductServiceProxy
   ) {
     super(injector);
   }
   ngOnInit(): void {}
   getAllRecord(event?: LazyLoadEvent) {
-    this._locationServiceProxy
-      .getAllLocation(
+    this._productServiceProxy
+      .getAllProduct(
         this.filter,undefined,
         undefined,
         this.getSkipCount(this.paginator, event),
         this.getMaxResultCount(this.paginator, event)
       )
       .subscribe((result) => {
-        this.locationRecord = result.items;
+        this.productRecord = result.items;
         this.totalRecord = result.totalCount;
       });
   }
 
-  createOrEditLocation(id?) {
-    let createOrEditLocationDialog: BsModalRef;
-    if (!id) {
-      createOrEditLocationDialog = this._modalService.show(
-        CreateLocationDialogComponent,
-        {
-          class: 'modal-lg',
-        }
-      );
-    } else {
-      createOrEditLocationDialog = this._modalService.show(
-        EditLocationDialogComponent,
+  createOrEditProduct(id?) {
+    let createOrEditProductDialog: BsModalRef;
+      createOrEditProductDialog = this._modalService.show(
+        CreateOrEditProductModelComponent,
         {
           class: 'modal-lg',
           initialState: {
-            id: id,
+            productId: id,
           },
         }
       );
-    }
-    createOrEditLocationDialog.content.onSave.subscribe(() => {
+    
+    createOrEditProductDialog.content.onSave.subscribe(() => {
       this.getAllRecord();
     });
   }
 
-  deleteLocation(id) {
+  deleteProduct(id) {
     abp.message.confirm(
       this.l("Are You Sure", ""),
       undefined,
       (result: boolean) => {
         if (result) {
-          this._locationServiceProxy
+          this._productServiceProxy
             .delete(id)
             .pipe(
               finalize(() => {

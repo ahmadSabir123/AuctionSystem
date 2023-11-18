@@ -6,6 +6,7 @@ using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using AuctionSystem.Authorization;
 using AuctionSystem.Categories.Dto;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -56,10 +57,10 @@ namespace AuctionSystem.Categorys
             var data = _categoryRepository.GetAll()
                 .WhereIf(input.CatagoryId != null, x => x.Id == input.CatagoryId)
                 .WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => e.Name.ToLower().Trim().Contains(input.Filter.ToLower().Trim()));
-            var location = data.Skip(input.SkipCount).Take(input.MaxResultCount).ToList();
+            var category = data.Skip(input.SkipCount).Take(input.MaxResultCount).ToList();
             return new PagedResultDto<CategoryDto>(
                 data.Count(),
-                ObjectMapper.Map<List<CategoryDto>>(location)
+                ObjectMapper.Map<List<CategoryDto>>(category)
             );
         }
 

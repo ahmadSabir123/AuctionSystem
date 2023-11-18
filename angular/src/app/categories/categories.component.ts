@@ -17,7 +17,7 @@ import { CategoryServiceProxy } from '@shared/service-proxies/service-proxies';
     animations: [appModuleAnimation()]
   })
 
-  export class CategoriesComponent extends AppComponentBase implements OnInit  {
+  export class CategoryComponent extends AppComponentBase implements OnInit  {
     @ViewChild("dataTable", { static: true }) dataTable: Table;
     @ViewChild("paginator", { static: true }) paginator: Paginator;
   

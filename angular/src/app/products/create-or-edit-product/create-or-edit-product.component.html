@@ -1,0 +1,40 @@
+<abp-modal-header [title]="modelTitle" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-5">
+      <input type="file" id="myFileInput" accept="image/*" (change)="onUpload($event)" style="display: none;">
+      <img [src]="prouctImg" width="275px" class="rounded d-block cursor-pointer" alt="productImage"
+        onclick="document.getElementById('myFileInput').click();">
+    </div>
+    <div class="col-7">
+      <div>
+        <label class="form-label" for="Name">{{ l('Name') }}</label>
+        <input type="text" #Name="ngModel" id="Name" class="form-control" [(ngModel)]="product.name" name="Name" />
+      </div>
+      <div class="mt-3">
+        <label class="form-label" for="StartDate">{{ l('Start Date') }}</label>
+        <p-calendar class="p-fluid" [(ngModel)]="startDate" [showIcon]="true"></p-calendar>
+      </div>
+      <div class="mt-3">
+        <label class="form-label" for="EndDate">{{ l('End Date') }}</label>
+        <p-calendar class="p-fluid" [(ngModel)]="endDate" [showIcon]="true"></p-calendar>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="mt-3">
+      <label class="form-label" for="Catagory">{{ l('Catagory') }}</label>
+      <p-dropdown class="p-fluid" placeholder="Select Catagory" [ngModelOptions]="{standalone: true}" [filter]='true'
+        optionValue="id" [options]="categorieslist" [(ngModel)]="catagory" optionLabel="name"></p-dropdown>
+    </div>
+    <div class="mt-3">
+      <label class="form-label" for="Location">{{ l('Location') }}</label>
+      <p-dropdown class="p-fluid" placeholder="Select Location" [ngModelOptions]="{standalone: true}" [filter]='true'
+        optionValue="id" [options]="locationlist" [(ngModel)]="location" optionLabel="name"></p-dropdown>
+    </div>
+  </div>
+</div>
+<button (click)="save()" class="btn btn-primary float-right" [disabled]="saving">
+  <i class="fa fa-save"></i>
+  <span>{{ l('Save') }}</span>
+</button>

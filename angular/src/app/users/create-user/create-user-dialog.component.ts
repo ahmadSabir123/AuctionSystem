@@ -13,6 +13,7 @@ import {
   CreateUserDto,
   RoleDto,
   LocationServiceProxy,
+  CommonLookUpServiceProxy,
 } from "@shared/service-proxies/service-proxies";
 import { AbpValidationError } from "@shared/components/validation/abp-validation.api";
 
@@ -46,6 +47,7 @@ export class CreateUserDialogComponent
 
   constructor(
     injector: Injector,
+    private _commonLookUpServiceProxy: CommonLookUpServiceProxy,
     public _userService: UserServiceProxy,
     public bsModalRef: BsModalRef,
     private _locationServiceProxy: LocationServiceProxy
@@ -54,6 +56,8 @@ export class CreateUserDialogComponent
   }
   locationlist: any;
   location: any;
+  userTypeList=[{name:"Seller", value:1},{name:"Buyer", value:0}]
+  userType:number;
 
   ngOnInit(): void {
     this.user.isActive = true;
@@ -67,11 +71,10 @@ export class CreateUserDialogComponent
     }
   }
   getAllLocationForDropdown() {
-    this._locationServiceProxy
-      .getAllLocation(undefined, undefined, undefined, undefined, undefined)
+    this._commonLookUpServiceProxy
+      .getAllLocationsForDropdown()
       .subscribe((result) => {
-        debugger;
-        this.locationlist = result.items;
+        this.locationlist = result;
       });
   }
 
@@ -108,6 +111,7 @@ export class CreateUserDialogComponent
 
     this.user.roleNames = this.getCheckedRoles();
     this.user.locationId = this.location;
+    this.user.type = this.userType;
 
     this._userService.create(this.user).subscribe(
       () => {
