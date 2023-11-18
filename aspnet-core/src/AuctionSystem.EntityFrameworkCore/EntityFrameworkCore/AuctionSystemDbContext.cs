@@ -10,7 +10,6 @@ namespace AuctionSystem.EntityFrameworkCore
     public class AuctionSystemDbContext : AbpZeroDbContext<Tenant, Role, User, AuctionSystemDbContext>
     {
         public virtual DbSet<AuctionSystem.Location.Location> Locations { get; set; }
-        public virtual DbSet<AuctionSystem.UserLocation.UserLocation> UserLocations { get; set; }
 
 
         public virtual DbSet<AuctionSystem.Category.Category> Categories { get; set; }

@@ -13,7 +13,6 @@ namespace AuctionSystem.Location
     public class Location : FullAuditedEntity<long>, IMustHaveTenant
     {
         public string Name { get; set; }
-        public int UserId { get; set; }
         public int TenantId { get; set; }
     }
 }

@@ -46,11 +46,15 @@ import { EditLocationDialogComponent } from '../app/locations/edit-location/edit
 import { CreateLocationDialogComponent } from '../app/locations/create-location/create-location-dialog.component';
 
 import { CategoriesComponent } from '../app/categories/categories.component';
+import { CreateCategoryDialogComponent } from './categories/create-category/create-category-dialog.component';
+import { EditCategoryDialogComponent } from '../app/categories/edit-category/edit-category-dialog.component';
 import { TableModule } from 'primeng/table';
 
 
 @NgModule({
     declarations: [
+        EditCategoryDialogComponent,
+        CreateCategoryDialogComponent,
         EditLocationDialogComponent,
         CreateLocationDialogComponent,
         CategoriesComponent,

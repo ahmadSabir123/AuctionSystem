@@ -28,7 +28,6 @@ namespace AuctionSystem.Users
     [AbpAuthorize(PermissionNames.Pages_Users)]
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
-        private readonly IRepository<AuctionSystem.UserLocation.UserLocation, long> _userLocationRepository;
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
         private readonly IRepository<Role> _roleRepository;
@@ -43,8 +42,8 @@ namespace AuctionSystem.Users
             IRepository<Role> roleRepository,
             IPasswordHasher<User> passwordHasher,
             IAbpSession abpSession,
-            LogInManager logInManager,
-            IRepository<UserLocation.UserLocation, long> userLocationRepository)
+            LogInManager logInManager
+            )
             : base(repository)
         {
             _userManager = userManager;
@@ -53,7 +52,6 @@ namespace AuctionSystem.Users
             _passwordHasher = passwordHasher;
             _abpSession = abpSession;
             _logInManager = logInManager;
-            _userLocationRepository = userLocationRepository;
         }
 
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
@@ -75,17 +73,6 @@ namespace AuctionSystem.Users
             }
 
             CurrentUnitOfWork.SaveChanges();
-            if(input.LocationId!= null)
-            {
-                AuctionSystem.UserLocation.UserLocation userLocation = new AuctionSystem.UserLocation.UserLocation();
-                if(AbpSession.TenantId != null)
-                {
-                    userLocation.TenantId = (int)AbpSession.TenantId;
-                }
-                userLocation.LocationId = input.LocationId;
-                userLocation.UserId = user.Id;
-                await _userLocationRepository.InsertAsync(userLocation);
-            }
 
             return MapToEntityDto(user);
         }

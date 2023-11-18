@@ -11,6 +11,7 @@ namespace AuctionSystem.Categorys
 {
     public interface ICategoryAppService : IApplicationService
     {
+        Task<PagedResultDto<CategoryDto>> GetAllCategories(GetAllCategoriesInput input);
         Task<long> CreateOrEdit(CategoryDto input);
         Task Delete(EntityDto<long> input);
     }

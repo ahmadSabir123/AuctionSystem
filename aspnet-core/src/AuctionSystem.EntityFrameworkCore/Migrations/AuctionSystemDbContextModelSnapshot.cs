@@ -1510,6 +1510,9 @@ namespace AuctionSystem.Migrations
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("LocationId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime?>("LockoutEndDateUtc")
                         .HasColumnType("datetime2");
 
@@ -1553,6 +1556,9 @@ namespace AuctionSystem.Migrations
                     b.Property<int?>("TenantId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -1565,6 +1571,8 @@ namespace AuctionSystem.Migrations
                     b.HasIndex("DeleterUserId");
 
                     b.HasIndex("LastModifierUserId");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("TenantId", "NormalizedEmailAddress");
 
@@ -1608,9 +1616,6 @@ namespace AuctionSystem.Migrations
                     b.Property<int>("TenantId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -1649,9 +1654,6 @@ namespace AuctionSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TenantId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -1721,53 +1723,6 @@ namespace AuctionSystem.Migrations
                     b.HasIndex("TenancyName");
 
                     b.ToTable("AbpTenants");
-                });
-
-            modelBuilder.Entity("AuctionSystem.UserLocation.UserLocation", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("LocationId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("TenantId")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserLocations");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>
@@ -1981,11 +1936,17 @@ namespace AuctionSystem.Migrations
                         .WithMany()
                         .HasForeignKey("LastModifierUserId");
 
+                    b.HasOne("AuctionSystem.Location.Location", "LocationIdFk")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
                     b.Navigation("CreatorUser");
 
                     b.Navigation("DeleterUser");
 
                     b.Navigation("LastModifierUser");
+
+                    b.Navigation("LocationIdFk");
                 });
 
             modelBuilder.Entity("AuctionSystem.MultiTenancy.Tenant", b =>
@@ -2013,21 +1974,6 @@ namespace AuctionSystem.Migrations
                     b.Navigation("Edition");
 
                     b.Navigation("LastModifierUser");
-                });
-
-            modelBuilder.Entity("AuctionSystem.UserLocation.UserLocation", b =>
-                {
-                    b.HasOne("AuctionSystem.Location.Location", "LocationIdFk")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
-
-                    b.HasOne("AuctionSystem.Authorization.Users.User", "UserIdFk")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("LocationIdFk");
-
-                    b.Navigation("UserIdFk");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>

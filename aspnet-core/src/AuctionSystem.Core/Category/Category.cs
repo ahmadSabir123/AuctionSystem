@@ -13,7 +13,6 @@ namespace AuctionSystem.Category
     public class Category : FullAuditedEntity<long>, IMustHaveTenant
     {
         public string Name { get; set; }
-        public int UserId { get; set; }
         public int TenantId { get; set; }
     }
 }
