@@ -16,6 +16,9 @@ using AuctionSystem.Product;
 using AutoMapper.Internal.Mappers;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Collections;
+using Abp.BackgroundJobs;
+using AuctionSystem.BackgroundJobs;
+using Hangfire;
 
 namespace AuctionSystem.Products
 {
@@ -52,14 +55,23 @@ namespace AuctionSystem.Products
             }
 
             input.Id = await _productRepository.InsertAndGetIdAsync(product);
+            if (input.AuctionStartAt.Value.Date == DateTime.Now.Date)
+            {
+                BackgroundJob.Schedule<AuctionStartBackgroundJob>((job) => job.ExecuteAsync(input), DateTime.Now);
+            }
+            else
+            {
+                BackgroundJob.Schedule<AuctionStartBackgroundJob>((job) => job.ExecuteAsync(input), input.AuctionStartAt.Value);
+            }
+            BackgroundJob.Schedule<AuctionEndBackgroundJob>((job) => job.ExecuteAsync(input), input.AuctionEndAt.Value);
             return (long)input.Id;
         }
         protected virtual async Task<long> Update(ProductDto input)
         {
             var product = await _productRepository.FirstOrDefaultAsync((long)input.Id);
-            product.Image = Convert.FromBase64String(input.ImageBase64);
             product.OwnerId = AbpSession.UserId;
             var data = ObjectMapper.Map(input, product);
+            data.Image = Convert.FromBase64String(input.ImageBase64);
             await _productRepository.UpdateAsync(data);
             return (long)input.Id;
 

@@ -23,6 +23,10 @@
   </div>
   <div>
     <div class="mt-3">
+      <label class="form-label" for="BasePrice">{{ l('Base Price') }}</label>
+      <input type="number" #BasePrice="ngModel" id="BasePrice" class="form-control" [(ngModel)]="product.basePrice" name="BasePrice" />
+    </div>
+    <div class="mt-3">
       <label class="form-label" for="Catagory">{{ l('Catagory') }}</label>
       <p-dropdown class="p-fluid" placeholder="Select Catagory" [ngModelOptions]="{standalone: true}" [filter]='true'
         optionValue="id" [options]="categorieslist" [(ngModel)]="catagory" optionLabel="name"></p-dropdown>
@@ -34,7 +38,6 @@
     </div>
   </div>
 </div>
-<button (click)="save()" class="btn btn-primary float-right" [disabled]="saving">
-  <i class="fa fa-save"></i>
+<button style="margin: 16px;" (click)="save()" class="btn btn-primary float-right" [disabled]="saving">
   <span>{{ l('Save') }}</span>
 </button>
