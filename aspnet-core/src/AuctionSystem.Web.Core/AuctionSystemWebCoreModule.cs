@@ -13,14 +13,17 @@ using AuctionSystem.Authentication.JwtBearer;
 using AuctionSystem.Configuration;
 using AuctionSystem.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Abp.Hangfire;
+using Abp.Hangfire.Configuration;
 
 namespace AuctionSystem
 {
     [DependsOn(
          typeof(AuctionSystemApplicationModule),
          typeof(AuctionSystemEntityFrameworkModule),
-         typeof(AbpAspNetCoreModule)
-        ,typeof(AbpAspNetCoreSignalRModule)
+         typeof(AbpAspNetCoreModule),
+        typeof(AbpAspNetCoreSignalRModule),
+        typeof(AbpHangfireAspNetCoreModule)
      )]
     public class AuctionSystemWebCoreModule : AbpModule
     {
@@ -46,6 +49,7 @@ namespace AuctionSystem
                  .CreateControllersForAppServices(
                      typeof(AuctionSystemApplicationModule).GetAssembly()
                  );
+            Configuration.BackgroundJobs.UseHangfire();
 
             ConfigureTokenAuth();
         }

@@ -20,6 +20,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using System.IO;
+using Hangfire;
+using Abp.Hangfire;
+using AuctionSystem.Authorization;
 
 namespace AuctionSystem.Web.Host.Startup
 {
@@ -74,6 +77,13 @@ namespace AuctionSystem.Web.Host.Startup
                 )
             );
 
+            services.AddHangfire(config =>
+            {
+                config.UseSqlServerStorage(_appConfiguration.GetConnectionString("Default"));
+            });
+
+            services.AddHangfireServer();
+
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
             ConfigureSwagger(services);
 
@@ -111,6 +121,10 @@ namespace AuctionSystem.Web.Host.Startup
                 endpoints.MapControllerRoute("defaultWithArea", "{area}/{controller=Home}/{action=Index}/{id?}");
             });
 
+            //Hangfire dashboard &server(Enable to use Hangfire instead of default job manager)
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            {
+            });
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger(c => { c.RouteTemplate = "swagger/{documentName}/swagger.json"; });
 
