@@ -4,6 +4,7 @@
     {
         public const string Pages_Tenants = "Pages.Tenants";
         public const string Pages_Products = "Pages.Products";
+        public const string Pages_Auctions = "Pages.Auctions";
         public const string Pages_Locations = "Pages.Locations";
         public const string Pages_Categories = "Pages.Categories";
         public const string Pages_Users = "Pages.Users";

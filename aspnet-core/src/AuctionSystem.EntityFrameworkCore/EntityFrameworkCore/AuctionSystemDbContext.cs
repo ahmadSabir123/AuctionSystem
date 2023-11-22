@@ -14,6 +14,7 @@ namespace AuctionSystem.EntityFrameworkCore
 
         public virtual DbSet<AuctionSystem.Category.Category> Categories { get; set; }
         public virtual DbSet<AuctionSystem.Product.Product> Products { get; set; }
+        public virtual DbSet<AuctionSystem.Auction.Auction> Auctions { get; set; }
 
         public AuctionSystemDbContext(DbContextOptions<AuctionSystemDbContext> options)
             : base(options)

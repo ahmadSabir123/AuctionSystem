@@ -24,5 +24,7 @@ namespace AuctionSystem.Products.Dto
         public long? LocationId { get; set; }
         public long? CategoryId { get; set; }
         public string ImageBase64 { get; set; }
+        public string LocationName {  get; set; }
+        public string CategoryName { get; set; }
     }
 }
