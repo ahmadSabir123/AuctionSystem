@@ -1,0 +1,81 @@
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <h1>{{ "Auctions" | localize }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content px-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-7">
+                    <div class="card">
+                        <div style="margin-bottom: 100px;">
+                            <div>
+                                <img [src]="getFileType(product.imageBase64)" width="500px"
+                                    class="rounded d-block cursor-pointer" alt="productImage">
+                            </div>
+                            <div class="mt-5" style="margin-left: 20px;">
+                                <div class="row" style="font-weight: bold;">
+                                    <div class="col-2">
+                                        Name
+                                    </div>
+                                    <div class="col-2">
+                                        Location
+                                    </div>
+                                    <div class="col-2">
+                                        Category Name
+                                    </div>
+                                    <div class="col-2">
+                                        Base Price
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-2">
+                                        {{product.name}}
+                                    </div>
+                                    <div class="col-2">
+                                        {{product.locationName }}
+                                    </div>
+                                    <div class="col-2">
+                                        {{product.categoryName }}
+                                    </div>
+                                    <div class="col-2">
+                                        Rs {{product.basePrice}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="card">
+                        <div style="margin-bottom: 100px; height: 625px; overflow-y: scroll;">
+                            <div class="input-group" style="padding-left: 10px;padding-right: 10px;padding-top: 15px;">
+                                <input type="number" class="form-control" name="filter"
+                                    [placeholder]="'Enter bid' | localize" [(ngModel)]="bid" (keyup.enter)="addUserBid()" />
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn bg-blue" (click)="addUserBid()">
+                                        <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div *ngFor="let item of userBids">
+                                <div *ngIf="userBids.length" style="padding-left: 15px; padding-top: 15px;">
+                                    <div style="font-weight: bold;">
+                                        <p>{{item.userName}}</p>
+                                        <img src="assets/img/user.png" alt="Logo" class="brand-image img-circle"
+                                            style="opacity: 0.8; width: 50px;" /> <span style="padding-left: 6px;">{{item.bid}} Rs</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

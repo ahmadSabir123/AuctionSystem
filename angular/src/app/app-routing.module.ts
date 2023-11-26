@@ -11,6 +11,8 @@ import { ChangePasswordComponent } from './users/change-password/change-password
 import { LocationComponent } from './locations/locations.component';
 import { CategoryComponent } from './categories/categories.component';
 import { ProductComponent } from './products/products.component';
+import { AuctionComponent } from './auctions/auctions.component';
+import { ViewAuctionComponent } from './auctions/view-auction/view-auction/view-auction.component';
 
 @NgModule({
     imports: [
@@ -19,6 +21,8 @@ import { ProductComponent } from './products/products.component';
                 path: '',
                 component: AppComponent,
                 children: [
+                    { path: 'viewAuctions', component: ViewAuctionComponent, data: { permission: 'Pages.Auctions' }, canActivate: [AppRouteGuard] },
+                    { path: 'auctions', component: AuctionComponent, data: { permission: 'Pages.Auctions' }, canActivate: [AppRouteGuard] },
                     { path: 'products', component: ProductComponent, data: { permission: 'Pages.Products' }, canActivate: [AppRouteGuard] },
                     { path: 'categories', component: CategoryComponent, data: { permission: 'Pages.Categories' }, canActivate: [AppRouteGuard] },
                     { path: 'locations', component: LocationComponent, data: { permission: 'Pages.Locations' }, canActivate: [AppRouteGuard] },

@@ -51,10 +51,14 @@ import { CategoryComponent } from '../app/categories/categories.component';
 import { CreateCategoryDialogComponent } from './categories/create-category/create-category-dialog.component';
 import { EditCategoryDialogComponent } from '../app/categories/edit-category/edit-category-dialog.component';
 import { TableModule } from 'primeng/table';
-
+import { AuctionComponent } from './auctions/auctions.component';
+import { ViewAuctionComponent } from './auctions/view-auction/view-auction/view-auction.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
     declarations: [
+        ViewAuctionComponent,
+        AuctionComponent,
         CreateOrEditProductModelComponent,
         ProductComponent,
         EditCategoryDialogComponent,
@@ -92,6 +96,7 @@ import { TableModule } from 'primeng/table';
         SidebarMenuComponent,
     ],
     imports: [
+        InputNumberModule,
         CalendarModule,
         DropdownModule,
         PaginatorModule,

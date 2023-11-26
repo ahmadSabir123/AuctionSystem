@@ -99,21 +99,6 @@ export class CreateOrEditProductModelComponent extends AppComponentBase
         this.categorieslist = result;
       });
   }
-  getFileType(base64Data: string): string {
-    if (base64Data) {
-      const decodedData = atob(base64Data);
-      let fileType = 'Unknown';
-      if (decodedData.startsWith('\x89\x50\x4E\x47\x0D\x0A\x1A\x0A')) {
-        fileType = 'data:image/png;base64,' + base64Data;
-      } else if (decodedData.slice(0, 2) === '\xFF\xD8' || decodedData.slice(0, 4) === '\xFF\xD8\xFF\xE1') {
-        fileType = 'data:image/JPEG;base64,' + base64Data;
-      }
-      return fileType;
-    }
-    else {
-      return 'assets/img/upload.png';
-    }
-  }
 
   save(): void {
     this.product.auctionStartAt = moment(this.startDate).utc(true);
