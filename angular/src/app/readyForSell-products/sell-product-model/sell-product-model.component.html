@@ -1,0 +1,28 @@
+<abp-modal-header [title]="modelTitle" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+<div class="modal-body">
+  <div class="row" style="font-weight: bold;">
+    <div class="col-4">
+      Product Name
+    </div>
+    <div class="col-4">
+      User Name
+    </div>
+    <div class="col-4">
+      Bid
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-4">
+      {{auction.productName}}
+    </div>
+    <div class="col-4">
+      {{auction.userName}}
+    </div>
+    <div class="col-4">
+      Rs {{auction.bid}}
+    </div>
+  </div>
+</div>
+<button style="margin: 16px;" (click)="sellProduct()" class="btn btn-success float-right" [disabled]="saving">
+  <span>{{ l('Sell') }}</span>
+</button>

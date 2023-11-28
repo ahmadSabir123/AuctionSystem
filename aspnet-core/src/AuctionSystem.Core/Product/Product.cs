@@ -22,6 +22,10 @@ namespace AuctionSystem.Product
         public bool IsProductSale {  get; set; }
         public DateTime? AuctionStartAt { get; set; }
         public DateTime? AuctionEndAt { get; set; }
+        public double? SoldPrice { get; set; }
+        public virtual long? NewOwnerId { get; set; }
+        [ForeignKey("NewOwnerId")]
+        public User NewOwnerFk { get; set; }
         public virtual long? OwnerId { get; set; }
         [ForeignKey("OwnerId")]
         public User OwnerFk { get; set; }

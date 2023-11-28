@@ -26,5 +26,8 @@ namespace AuctionSystem.Products.Dto
         public string ImageBase64 { get; set; }
         public string LocationName {  get; set; }
         public string CategoryName { get; set; }
+        public string SoldTo { get; set; }
+        public string BuyFrom { get; set; }
+        public double? SoldPrice { get; set; }
     }
 }

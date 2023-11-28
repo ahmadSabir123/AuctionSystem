@@ -1,0 +1,99 @@
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <h1>{{ "Auctions" | localize }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content px-2">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">&emsp;</div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn bg-blue" (click)="getAllRecord()">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <input type="text" class="form-control" name="filter"
+                                    [placeholder]="'SearchWithThreeDot' | localize" [(ngModel)]="filter"
+                                    (keyup.enter)="getAllRecord()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush mt-5">
+                    <li class="list-group-item" *ngFor="let item of productRecord">
+                        <div class="row" (click)="open(item.id)" style="cursor: pointer;">
+                            <div class="col-2">
+                                <img [src]="getFileType(item.imageBase64)" width="100px"
+                                    class="rounded d-block cursor-pointer" alt="productImage">
+                            </div>
+                            <div class="col-8">
+                                <div class="row" style="font-weight: bold;">
+                                    <div class="col-2">
+                                        Name
+                                    </div>
+                                    <div class="col-2">
+                                        Location
+                                    </div>
+                                    <div class="col-2">
+                                        Category Name
+                                    </div>
+                                    <div class="col-2">
+                                        Start Date
+                                    </div>
+                                    <div class="col-2">
+                                        End Date
+                                    </div>
+                                    <div class="col-2">
+                                        Base Price
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-2">
+                                        {{item.name}}
+                                    </div>
+                                    <div class="col-2">
+                                        {{item.locationName }}
+                                    </div>
+                                    <div class="col-2">
+                                        {{item.categoryName }}
+                                    </div>
+                                    <div class="col-2">
+                                        {{item.auctionStartAt | date:'dd MMMM yyyy'}}
+                                    </div>
+                                    <div class="col-2">
+                                        {{item.auctionEndAt | date:'dd MMMM yyyy'}}
+                                    </div>
+                                    <div class="col-2">
+                                        Rs {{item.basePrice}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="card-body">
+                    <div class="primeng-no-data" *ngIf="productRecord.length == 0">
+                        {{ l('NoData') }}
+                    </div>
+                    <div class="primeng-paging-container">
+                        <p-paginator [rows]="10" #paginator (onPageChange)="getAllRecord($event)"
+                            [totalRecords]="totalRecord" [rowsPerPageOptions]="[5, 10, 25 ]"
+                            [showCurrentPageReport]="true" [currentPageReportTemplate]="
+                                'TotalRecordsCount' | localize : totalRecord
+                            "></p-paginator>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

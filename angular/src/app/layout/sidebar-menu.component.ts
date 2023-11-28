@@ -70,6 +70,24 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 'Pages.Products'
             ),
             new MenuItem(
+                this.l('Ready for Sell'),
+                '/app/readyforSell',
+                'fa fa-hourglass-start',
+                'Pages.Products'
+            ),
+            new MenuItem(
+                this.l('Sold Products'),
+                '/app/soldProducts',
+                'fa fa-credit-card-alt',
+                'Pages.Products'
+            ),
+            new MenuItem(
+                this.l('Buy Products'),
+                '/app/buyProducts',
+                'fa fa-shopping-cart',
+                'Pages.Products'
+            ),
+            new MenuItem(
                 this.l('Locations'),
                 '/app/locations',
                 'fa fa-location-arrow',

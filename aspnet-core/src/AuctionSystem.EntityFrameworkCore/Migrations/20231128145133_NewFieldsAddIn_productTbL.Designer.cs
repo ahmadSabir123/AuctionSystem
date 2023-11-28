@@ -4,6 +4,7 @@ using AuctionSystem.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuctionSystem.Migrations
 {
     [DbContext(typeof(AuctionSystemDbContext))]
-    partial class AuctionSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231128145133_NewFieldsAddIn_productTbL")]
+    partial class NewFieldsAddIn_productTbL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

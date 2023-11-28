@@ -79,7 +79,7 @@ namespace AuctionSystem.Products
         public async Task<PagedResultDto<ProductDto>> GetAllProduct(GetAllProductsInput input)   
         {
 
-            var data = _productRepository.GetAll().Where(x=>x.OwnerId==AbpSession.UserId)
+            var data = _productRepository.GetAll().Where(x => x.OwnerId == AbpSession.UserId && x.IsProductSale == false)
                 .WhereIf(input.ProductId != null, x => x.Id == input.ProductId)
                 .WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => e.Name.ToLower().Trim().Contains(input.Filter.ToLower().Trim()));
             var location = data.Skip(input.SkipCount).Take(input.MaxResultCount).ToList();

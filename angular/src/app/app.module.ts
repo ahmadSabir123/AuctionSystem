@@ -54,9 +54,17 @@ import { TableModule } from 'primeng/table';
 import { AuctionComponent } from './auctions/auctions.component';
 import { ViewAuctionComponent } from './auctions/view-auction/view-auction/view-auction.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SoldProductComponent } from './sold-products/sold-products.component';
+import { BuyProductComponent } from './buy-products/buy-products.component';
+import { ReadyForSellProductComponent } from './readyForSell-products/readyForSell-products.component';
+import { SellProductModelComponent } from './readyForSell-products/sell-product-model/sell-product-model.component';
 
 @NgModule({
     declarations: [
+        SellProductModelComponent,
+        ReadyForSellProductComponent,
+        BuyProductComponent,
+        SoldProductComponent,
         ViewAuctionComponent,
         AuctionComponent,
         CreateOrEditProductModelComponent,

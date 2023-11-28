@@ -13,6 +13,9 @@ import { CategoryComponent } from './categories/categories.component';
 import { ProductComponent } from './products/products.component';
 import { AuctionComponent } from './auctions/auctions.component';
 import { ViewAuctionComponent } from './auctions/view-auction/view-auction/view-auction.component';
+import { SoldProductComponent } from './sold-products/sold-products.component';
+import { BuyProductComponent } from './buy-products/buy-products.component';
+import { ReadyForSellProductComponent } from './readyForSell-products/readyForSell-products.component';
 
 @NgModule({
     imports: [
@@ -21,6 +24,9 @@ import { ViewAuctionComponent } from './auctions/view-auction/view-auction/view-
                 path: '',
                 component: AppComponent,
                 children: [
+                    { path: 'readyforSell', component: ReadyForSellProductComponent, data: { permission: 'Pages.Products' }, canActivate: [AppRouteGuard] },
+                    { path: 'buyProducts', component: BuyProductComponent, data: { permission: 'Pages.Products' }, canActivate: [AppRouteGuard] },
+                    { path: 'soldProducts', component: SoldProductComponent, data: { permission: 'Pages.Products' }, canActivate: [AppRouteGuard] },
                     { path: 'viewAuctions', component: ViewAuctionComponent, data: { permission: 'Pages.Auctions' }, canActivate: [AppRouteGuard] },
                     { path: 'auctions', component: AuctionComponent, data: { permission: 'Pages.Auctions' }, canActivate: [AppRouteGuard] },
                     { path: 'products', component: ProductComponent, data: { permission: 'Pages.Products' }, canActivate: [AppRouteGuard] },
